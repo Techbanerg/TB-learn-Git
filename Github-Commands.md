@@ -35,7 +35,12 @@ The act of cloning an entire repository into your workstation to get a local rep
 * To Identify good and bad commits
 ### Git Reset:
 * The first method is a simple way to throw away few recent commits, it re-writes the commit history, so only use it when your changes are not pushed to the server yet (or when you are 100% sure about what you are doing).
+* Git reset should generally be considered a 'local' undo method. A reset should be used when undoing changes to a private branch. This safely isolates the removal of commits from other branches that may be in use by other developers. Problems arise when a reset is executed on a shared branch and that branch is then pushed remotely with git push. Git will block the push in this scenario complaining that the branch being pushed is out of date from the remote branch as it is missing commits.
+
+* The preferred method of undoing shared history is git revert. A revert is safer than a reset because it will not remove any commits from a shared history. A revert will retain the commits you want to undo and create a new commit that inverts the undesired commit. This method is safer for shared remote collaboration because a remote developer can then pull the branch and receive the new revert commit which undoes the undesired commit.
+
 ### Git Revert:
+Let's assume we are back to our original commit history example. The history that includes the 872fa7e commit. This time let's try a revert 'undo'. If we execute git revert HEAD, Git will create a new commit with the inverse of the last commit. 
 
 ### Git Bisect:
 This command uses a binary search algorithm to find which commit in your project’s history introduced a bug. You use it by first telling it a "bad" commit that is known to contain the bug, and a "good" commit that is known to be before the bug was introduced.Then git bisect picks a commit between those two endpoints and asks you whether the selected commit is "good" or "bad". It  continues narrowing down the range until it finds the exact commit that introduced the change. 
@@ -141,3 +146,6 @@ Git cherry-pick is a powerful command that enables arbitrary Git commits to be p
 |`git cherry-pick --continue`| picking gets halted because of conflicts |
 |`git cherry-pick --abort`| If you want to bail of this step |
 
+## Links
+* https://www.atlassian.com/git/tutorials/undoing-changes
+* https://www.previousnext.com.au/blog/intro-cherry-picking-git
