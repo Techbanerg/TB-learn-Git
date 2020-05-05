@@ -130,11 +130,14 @@ Git cherry-pick is a powerful command that enables arbitrary Git commits to be p
 |`git reset 1a45gf02`| Reset to SHA |
 |`git revert --no-commit HEAD~3`| Revert the changes specified by the fourth last commit in HEAD |
 |`git revert HEAD~3`| Revert the changes specified by the fourth last commit in HEAD and create a new commit with the reverted changes.|
-|`git bisect start`|
-|`git bisect bad <SHA>`|
-|`git bisect good SHA>`|
-|`git bisect reset` |
-|`git cherry-pick commitSha`|
-|`git cherry-pick -x <commit-hash>`|
-
+|`git bisect start`| Git bisect is like a wizard to find the commit that broke your code. |
+|`git bisect bad <SHA>`| git bisect checked out an old commit for us |
+|`git bisect good SHA>`| Let the git bisect wizard know of a good commit |
+|`git bisect reset` | To end your git bisect wizard, simply type git bisect reset |
+|`git cherry-pick commitSha`|  it creates a new commit with a new SHA.
+|`git cherry-pick <SHA> --no-commit`| picked a commit from one branch, and pasted to another |
+|`git cherry-pick -x <commit-hash>`| it creates a new commit with a new SHA. |
+|`git cherry-pick d467740 de906d4` | cherry pick more than one commit in one go, you can add their commit IDs separated by a space|
+|`git cherry-pick --continue`| picking gets halted because of conflicts |
+|`git cherry-pick --abort`| If you want to bail of this step |
 
